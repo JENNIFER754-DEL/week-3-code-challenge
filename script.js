@@ -9,12 +9,12 @@ const buyTicketButton = document.getElementById('buy-ticket-button');
 
 let currentFilmId = 1;
 
-// Fetch and display all films
+
 function fetchFilms() {
     fetch('http://localhost:3000/films')
         .then(response => response.json())
         .then(films => {
-            filmsList.innerHTML = ''; // Clear the list before adding films
+            filmsList.innerHTML = ''; 
             films.forEach(film => {
                 const li = document.createElement('li');
                 li.className = 'list-group-item film item';
@@ -23,11 +23,11 @@ function fetchFilms() {
                 li.addEventListener('click', () => loadFilmDetails(film.id));
                 filmsList.appendChild(li);
             });
-            loadFilmDetails(currentFilmId); // Load details for the first film
+            loadFilmDetails(currentFilmId); 
         });
 }
 
-// Load film details
+
 function loadFilmDetails(id) {
     fetch(`http://localhost:3000/films/${id}`)
         .then(response => response.json())
@@ -37,11 +37,11 @@ function loadFilmDetails(id) {
             moviePoster.src = film.poster;
             movieRuntime.textContent = film.runtime;
             movieShowtime.textContent = film.showtime;
-            movieDescription.textContent = film.description; // Update the movie description
+            movieDescription.textContent = film.description;
             const ticketsAvailable = film.capacity - film.tickets_sold;
             availableTickets.textContent = ticketsAvailable;
 
-            // Update button and film list
+           
             if (ticketsAvailable <= 0) {
                 buyTicketButton.textContent = 'Sold Out';
                 buyTicketButton.disabled = true;
@@ -54,27 +54,26 @@ function loadFilmDetails(id) {
         });
 }
 
-// Buy a ticket
+
 buyTicketButton.addEventListener('click', () => {
     fetch(`http://localhost:3000/films/${currentFilmId}`)
         .then(response => response.json())
         .then(film => {
             if (film.tickets_sold < film.capacity) {
-                film.tickets_sold++; // Increment tickets sold
+                film.tickets_sold++; 
                 fetch(`http://localhost:3000/films/${currentFilmId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ tickets_sold: film.tickets_sold }) // Send updated tickets_sold
+                    body: JSON.stringify({ tickets_sold: film.tickets_sold }) 
                 })
                 .then(response => response.json())
                 .then(() => {
-                    loadFilmDetails(currentFilmId); // Reload film details to update UI
+                    loadFilmDetails(currentFilmId);
                 });
             }
         });
 });
 
-// Initialize the app
 fetchFilms();

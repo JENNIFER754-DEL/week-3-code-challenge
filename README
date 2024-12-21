@@ -1,0 +1,29 @@
+Flatiron Movie Theater
+A simple web application that allows users to view movies, their details, and purchase tickets for a selected movie. This project demonstrates the use of HTML, CSS, JavaScript, and JSON data to simulate a movie theater experience.
+
+Features
+Display a list of movies available at the theater.
+View movie details, including the title, poster, description, runtime, showtime, and available tickets.
+Purchase tickets (updating ticket availability in real-time).
+Movie data is fetched from a local JSON file and displayed dynamically.
+
+Technologies Used
+HTML: Structure of the movie theater page.
+CSS: Styling the page to ensure a responsive and clean layout.
+JavaScript: Functionality for fetching and displaying data, and handling ticket purchase logic.
+JSON: Movie data stored in a local db.json file.
+Project Setup
+Clone this repository: Clone the repository to your local machine and navigate to the project directory.
+
+Install a local server: Since the application fetches data from a local server (via http://localhost:3000/films), you'll need to run a simple server to serve the db.json file. You can use json-server to achieve this.
+
+
+Install json-server globally using your terminal, if you do not have it already
+
+In the project directory, run the command to start the server.
+
+Open the project: Open the index.html file in your browser to view the movie theater page.
+
+How It Works
+Main Interface: The page displays a list of films available. When a film is selected, its details (title, poster, description, runtime, showtime, and available tickets) will be shown.
+Ticket Purchase: If there are available tickets, you can click the "Buy Ticket" button to increment the number of tickets sold. The button will update to "Sold Out" if no tickets are available.
